@@ -10,49 +10,50 @@ Airtable.configure({
 
 const base = Airtable.base('appDlF1n3LmT47cDl');
 
-function getRecords(list) {
+const receivedRecords = new Promise((resolve, reject) => {
   base('Books').select({}).eachPage(function page(records, fetchNextSet) {
-    list = records;
-    console.log(list[0].fields.Title);
-    return list;
+    resolve(records);
   }, function done(error) {
     console.log(error);
   });
-};
+});
+
+receivedRecords.then((data) => {
+  console.log(data);
+  return data;
+});
 
 class App extends React.Component {
-  render(props) {
-    let books = [];
-    console.log(books);
+  componentDidMount() {
+    const self = this;
 
-    let done = true;
-
-    const isItDoneYet = new Promise((resolve, reject) => {
-      if (done) {
-        getRecords(books);
-        resolve(books)
-      } else {
-        const why = 'Still working on something else'
-        reject(why)
-      }
+    receivedRecords.then(function(response) {
+      self.setState({data: response});
     });
+  }
 
-    const checkIfItsDone = () => {
-      isItDoneYet
-        .then(books => {
-          console.log(books)
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    }
-
+  render(props) {
     return (
       <div className="App">
         <header className="App-header">
-          <Card 
-            title="ke"
-          />
+        { this.state && this.state.data &&
+          (this.state.data).map(function(data, key) {
+            return <Card
+              title = {data.fields["Title"]}
+              author = {data.fields["Author"]}
+              authorAlphabetized = {data.fields["Author l-f"]}
+              id = {key}
+              ISBN = {data.fields["ISBN"]}
+              ISBN13 = {data.fields["ISBN13"]}
+              rating = {data.fields["My Rating"]}
+              publisher = {data.fields["Publisher"]}
+              format = {data.fields["Book Format"]}
+              numberOfPages = {data.fields["Number of Pages"]}
+              publicationYear = {data.fields["Publication Year"]}
+              dateAdded = {data.fields["Date Added"]}
+            />
+          })
+        }
         </header>
       </div>
     );
