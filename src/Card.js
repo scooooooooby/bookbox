@@ -4,29 +4,37 @@ import PropTypes from 'prop-types';
 class Card extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Title: {this.props.title}</h1>
-        <h2>Author: {this.props.author}</h2>
-        <h2>Author alphabetized: {this.props.authorAlphabetized}</h2>
-        <p>Book ID: {this.props.id}</p>
-        <p>ISBN: {this.props.ISBN}</p>
-        <p>ISBN13: {this.props.ISBN13}</p>
-        <p>Rating: {this.props.rating}</p>
-        <p>Publisher: {this.props.publisher}</p>
-        <p>Format: {this.props.format}</p>
-        <p>Number of Pages: {this.props.numberOfPages}</p>
-        <p>Publication Year: {this.props.publicationYear}</p>
-        <p>Date Added: {this.props.dateAdded}</p>
+      <div className="card" key={this.key}>
+        <div className="card__image">
+          {this.props.bookJacket ? 
+            <img src={this.props.bookJacket[0].thumbnails.large.url} /> : 
+            null
+          }
+        </div>
+
+        <div className="card__content">
+          <h2>{this.props.title}</h2>
+          <h3>{this.props.author}</h3>
+          <p>Rating: {this.props.rating}</p>
+          <p>Number of Pages: {this.props.numberOfPages}</p>
+          <p>{this.props.description}</p>
+          <p>Tags: {this.props.tags}</p>
+        </div>
+
+        <div className="card__ctas">
+          <button>EDIT TEH TING</button>
+        </div>
       </div>
     );
   }
 }
 
 Card.propTypes = {
-  title: PropTypes.string,
-  id: PropTypes.number,
-  author: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   authorAlphabetized: PropTypes.string,
+  additionalAuthors: PropTypes.string,
   ISBN: PropTypes.number,
   ISBN13: PropTypes.number,
   rating: PropTypes.array,
@@ -34,8 +42,12 @@ Card.propTypes = {
   format: PropTypes.string,
   numberOfPages: PropTypes.number,
   publicationYear: PropTypes.number,
+  dateRead: PropTypes.string,
   dateAdded: PropTypes.string,
   shelves: PropTypes.array,
+  readCount: PropTypes.number,
+  tags: PropTypes.array,
+  bookJacket: PropTypes.array,
   // description: record.get('Book Description');
   // myReview : record.get('My Review');
   // spoiler : record.get('Spoilers');
@@ -44,7 +56,6 @@ Card.propTypes = {
   // readCount : record.get('Read Count');
   // recommendedFor : record.get('Recommended For');
   // recommendedBy : record.get('Recommended By');
-  // Cover : record.get('Book Cover');
   // Tags : record.get('Tags');
 };
 

@@ -16,9 +16,7 @@ const receivedRecords = new Promise((resolve, reject) => {
   }, function done(error) {
     console.log(error);
   });
-});
-
-receivedRecords.then((data) => {
+}).then((data) => {
   console.log(data);
   return data;
 });
@@ -37,20 +35,17 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
         { this.state && this.state.data &&
-          (this.state.data).map(function(data, key) {
+          (this.state.data).map(function(data, index) {
             return <Card
               title = {data.fields["Title"]}
+              key = {index}
               author = {data.fields["Author"]}
               authorAlphabetized = {data.fields["Author l-f"]}
-              id = {key}
-              ISBN = {data.fields["ISBN"]}
-              ISBN13 = {data.fields["ISBN13"]}
               rating = {data.fields["My Rating"]}
-              publisher = {data.fields["Publisher"]}
-              format = {data.fields["Book Format"]}
               numberOfPages = {data.fields["Number of Pages"]}
-              publicationYear = {data.fields["Publication Year"]}
-              dateAdded = {data.fields["Date Added"]}
+              tags = {data.fields["Tags"]}
+              description = {data.fields["Book Description"]}
+              bookJacket = {data.fields["Book Cover"]}
             />
           })
         }
