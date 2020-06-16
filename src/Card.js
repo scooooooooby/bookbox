@@ -1,28 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as DS from '@nypl/design-system-react-components';
+
 
 class Card extends React.Component {
+  createDescription () {
+    let shortDescription = (this.props.description).substring(0, 7);
+    return shortDescription;
+  }
+
   render() {
     return (
-      <div className="card" key={this.key}>
-        <div className="card__image">
-          {this.props.bookJacket ? 
-            <img src={this.props.bookJacket[0].thumbnails.large.url} /> : 
-            null
-          }
-        </div>
+      <div>
+        <DS.EditionCard 
+          id={this.key}
+          editionHeadingElement={this.props.title}
+          editionInfo={["Author", "Name", "Something", "Yes"]}
+        />
+        <div className="card" key={this.key}>
+          <div className="card__image">
+            {this.props.bookJacket ? 
+              <img src={this.props.bookJacket[0].thumbnails.large.url} alt="" /> : <div>No image</div>
+            }
+          </div>
 
-        <div className="card__content">
-          <h2>{this.props.title}</h2>
-          <h3>{this.props.author}</h3>
-          <p>Rating: {this.props.rating}</p>
-          <p>Number of Pages: {this.props.numberOfPages}</p>
-          <p>{this.props.description}</p>
-          <p>Tags: {this.props.tags}</p>
-        </div>
+          <div className="card__content">
+            <h2>{this.props.title}</h2>
+            <h3>{this.props.author}</h3>
+            <p>Rating: {this.props.rating}</p>
+            <p>Number of Pages: {this.props.numberOfPages}</p>
+            <p>{this.props.description}</p>
+            <p>Tags: {this.props.tags}</p>
+          </div>
 
-        <div className="card__ctas">
-          <button>EDIT TEH TING</button>
+          <div className="card__ctas">
+            <button>EDIT TEH TING</button>
+          </div>
         </div>
       </div>
     );

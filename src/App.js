@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Card from './Card.js';
 import Airtable from 'airtable';
 
