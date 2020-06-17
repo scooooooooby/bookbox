@@ -1,27 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import * as DS from '@nypl/design-system-react-components';
-
+import React from "react";
+import PropTypes from "prop-types";
 
 class Card extends React.Component {
-  createDescription () {
-    let shortDescription = (this.props.description).substring(0, 7);
+  state = { isOpen: false, value: "" };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+    this.toggleContentShow = this.toggleContentShow.bind(this);
+  }
+
+  createDescription() {
+    let shortDescription = this.props.description.substring(0, 7);
     return shortDescription;
+  }
+
+  toggleContentShow() {
+    this.setState(() => ({ isOpen: !this.state.isOpen }));
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
   render() {
     return (
       <div>
-        <DS.EditionCard 
-          id={this.key}
-          editionHeadingElement={this.props.title}
-          editionInfo={["Author", "Name", "Something", "Yes"]}
-        />
         <div className="card" key={this.key}>
           <div className="card__image">
-            {this.props.bookJacket ? 
-              <img src={this.props.bookJacket[0].thumbnails.large.url} alt="" /> : <div>No image</div>
-            }
+            {this.props.bookJacket ? (
+              <img src={this.props.bookJacket[0].thumbnails.large.url} alt="" />
+            ) : (
+              <div>No image</div>
+            )}
           </div>
 
           <div className="card__content">
@@ -34,9 +47,36 @@ class Card extends React.Component {
           </div>
 
           <div className="card__ctas">
-            <button>EDIT TEH TING</button>
+            <button onClick={this.toggleContentShow}>EDIT TEH TING</button>
           </div>
         </div>
+
+        {this.state.isOpen && (
+          <div
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              backgroundColor: "gray",
+              top: "0",
+              left: "0",
+              padding: "2%",
+            }}
+          >
+            <button onClick={this.toggleContentShow}>Close Modal</button>
+            <form>
+              <label>
+                Title:{" "}
+                <input
+                  type="text"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        )}
       </div>
     );
   }
@@ -44,13 +84,13 @@ class Card extends React.Component {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  author: PropTypes.string,
   authorAlphabetized: PropTypes.string,
   additionalAuthors: PropTypes.string,
   ISBN: PropTypes.number,
   ISBN13: PropTypes.number,
-  rating: PropTypes.array,
+  rating: PropTypes.string,
   publisher: PropTypes.string,
   format: PropTypes.string,
   numberOfPages: PropTypes.number,
@@ -61,6 +101,7 @@ Card.propTypes = {
   readCount: PropTypes.number,
   tags: PropTypes.array,
   bookJacket: PropTypes.array,
+  isOpen: PropTypes.bool,
   // description: record.get('Book Description');
   // myReview : record.get('My Review');
   // spoiler : record.get('Spoilers');
