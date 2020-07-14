@@ -1,36 +1,7 @@
 /** Import Design System Styles */
-// @import '~@nypl/design-system-styles/style';
+@import '~@nypl/design-system-react-components/dist/styles.css';
 
 .App {
-  padding: 1rem 2rem;
   box-sizing: border-box;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
-
-.card {
-  border: 1px solid cornflowerblue;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-}
-
-.card__image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 1 300px;
-  margin-right: 1rem;
-  background-color: cornflowerblue;
-}
-
-.card__content {
-  flex: 1;
-  margin-right: 1rem;
-}
-
-.card__ctas {
-  flex: 0 1 200px;
+  padding: 1rem 2rem;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import Card from './Card.js';
+import BBCard from './Card.js';
 import Airtable from 'airtable';
 
 Airtable.configure({
@@ -25,8 +25,8 @@ class App extends React.Component {
   componentDidMount() {
     const self = this;
 
-    receivedRecords.then(function(response) {
-      self.setState({data: response});
+    receivedRecords.then(function (response) {
+      self.setState({ data: response });
     });
   }
 
@@ -34,21 +34,21 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-        { this.state && this.state.data &&
-          (this.state.data).map(function(data, index) {
-            return <Card
-              title = {data.fields["Title"]}
-              key = {index}
-              author = {data.fields["Author"]}
-              authorAlphabetized = {data.fields["Author l-f"]}
-              rating = {data.fields["My Rating"]}
-              numberOfPages = {data.fields["Number of Pages"]}
-              tags = {data.fields["Tags"]}
-              description = {data.fields["Book Description"]}
-              bookJacket = {data.fields["Book Cover"]}
-            />
-          })
-        }
+          {this.state && this.state.data &&
+            (this.state.data).map(function (data, index) {
+              return <BBCard
+                title={data.fields["Title"]}
+                key={index}
+                author={data.fields["Author"]}
+                authorAlphabetized={data.fields["Author l-f"]}
+                rating={data.fields["My Rating"]}
+                numberOfPages={data.fields["Number of Pages"]}
+                tags={data.fields["Tags"]}
+                description={data.fields["Book Description"]}
+                bookJacket={data.fields["Book Cover"]}
+              />
+            })
+          }
         </header>
       </div>
     );

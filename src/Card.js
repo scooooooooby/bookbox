@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Button, ButtonTypes, Card, Image, Heading } from "@nypl/design-system-react-components";
 
-class Card extends React.Component {
+class BBCard extends React.Component {
   state = { isOpen: false, value: "" };
 
   constructor(props) {
@@ -27,62 +28,36 @@ class Card extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="card" key={this.key}>
-          <div className="card__image">
-            {this.props.bookJacket ? (
-              <img src={this.props.bookJacket[0].thumbnails.large.url} alt="" />
-            ) : (
-              <div>No image</div>
-            )}
-          </div>
-
-          <div className="card__content">
-            <h2>{this.props.title}</h2>
-            <h3>{this.props.author}</h3>
-            <p>Rating: {this.props.rating}</p>
-            <p>Number of Pages: {this.props.numberOfPages}</p>
-            <p>{this.props.description}</p>
-            <p>Tags: {this.props.tags}</p>
-          </div>
-
-          <div className="card__ctas">
-            <button onClick={this.toggleContentShow}>EDIT TEH TING</button>
-          </div>
-        </div>
-
-        {this.state.isOpen && (
-          <div
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              backgroundColor: "gray",
-              top: "0",
-              left: "0",
-              padding: "2%",
-            }}
-          >
-            <button onClick={this.toggleContentShow}>Close Modal</button>
-            <form>
-              <label>
-                Title:{" "}
-                <input
-                  type="text"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
-        )}
-      </div>
+      <Card
+        id="cardID"
+        heading={<Heading level={1} id="heading1" text={"Heading 1"} />}
+        image={
+          <Image
+            src={this.props.bookJacket ? this.props.bookJacket[0].thumbnails.large.url : null}
+            isDecorative={true}
+          />
+        }
+        ctas={
+          <Button
+            onClick={this.toggleContentShow}
+            id="button1"
+            type="submit"
+          >aspdfk</Button>
+        }
+        footer={"Optional footer"}
+      >
+        <h2>{this.props.title}</h2>
+        <h3>{this.props.author}</h3>
+        <p>Rating: {this.props.rating}</p>
+        <p>Number of Pages: {this.props.numberOfPages}</p>
+        <p>{this.props.description}</p>
+        <p>Tags: {this.props.tags}</p>
+      </Card>
     );
   }
 }
 
-Card.propTypes = {
+BBCard.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.string,
   author: PropTypes.string,
@@ -113,4 +88,4 @@ Card.propTypes = {
   // Tags : record.get('Tags');
 };
 
-export default Card;
+export default BBCard;
