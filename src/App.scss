@@ -1,10 +1,23 @@
 /** Import Design System Styles */
-@import '~@nypl/design-system-react-components/dist/styles.css';
+@import "~@nypl/design-system-react-components/dist/styles.css";
 
 .App {
   padding: 2rem 4rem;
 }
 
 .bb-card {
-  // background-color: tomato;
+  .card__ctas {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  &__description {
+    font-style: italic;
+  }
+
+  .button {
+    flex: 1 1 100%;
+  }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Button,
+  ButtonTypes,
   Card,
   Image,
   Heading,
@@ -34,7 +35,6 @@ class BBCard extends React.Component {
   render() {
     return (
       <Card
-        id="cardID"
         heading={<Heading level={2} text={this.props.title} />}
         className="bb-card"
         image={
@@ -49,15 +49,22 @@ class BBCard extends React.Component {
           />
         }
         ctas={
-          <Button onClick={this.toggleContentShow} id="button1" type="submit">
-            Edit Record
-          </Button>
+          <>
+            <Button
+              onClick={this.toggleContentShow}
+              id="button1"
+              type="submit"
+              buttonType={ButtonTypes.Primary}
+            >
+              Edit Record
+            </Button>
+            <p>Number of Pages: {this.props.numberOfPages}</p>
+          </>
         }
       >
         <h3>{this.props.author}</h3>
         {this.props.rate && <p>Rating: {this.props.rating}</p>}
-        <p>Number of Pages: {this.props.numberOfPages}</p>
-        <p>
+        <p className="bb-card__description">
           {this.props.description &&
             this.props.description.substring(0, 250) + "..."}
         </p>
