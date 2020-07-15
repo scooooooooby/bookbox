@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Card, Image, Heading } from "@nypl/design-system-react-components";
+import {
+  Button,
+  Card,
+  Image,
+  Heading,
+} from "@nypl/design-system-react-components";
 
 class BBCard extends React.Component {
   state = { isOpen: false, value: "" };
@@ -34,22 +39,28 @@ class BBCard extends React.Component {
         className="bb-card"
         image={
           <Image
-            src={this.props.bookJacket ? this.props.bookJacket[0].thumbnails.large.url : null}
+            src={
+              this.props.bookJacket
+                ? this.props.bookJacket[0].thumbnails.large.url
+                : null
+            }
             isDecorative={true}
+            alt={this.props.title}
           />
         }
         ctas={
-          <Button
-            onClick={this.toggleContentShow}
-            id="button1"
-            type="submit"
-          >Edit Record</Button>
+          <Button onClick={this.toggleContentShow} id="button1" type="submit">
+            Edit Record
+          </Button>
         }
       >
         <h3>{this.props.author}</h3>
         {this.props.rate && <p>Rating: {this.props.rating}</p>}
         <p>Number of Pages: {this.props.numberOfPages}</p>
-        <p>{this.props.description && (this.props.description).substring(0, 250) + "..."}</p>
+        <p>
+          {this.props.description &&
+            this.props.description.substring(0, 250) + "..."}
+        </p>
       </Card>
     );
   }
