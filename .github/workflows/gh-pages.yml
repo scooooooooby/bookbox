@@ -21,7 +21,7 @@ jobs:
 
       - name: Cache and install node modules
         uses: bahmutov/npm-install@v1
-      - name: Build Storybook
+      - name: Build react-app
         run: npm run build
 
       - name: Deploy
