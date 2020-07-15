@@ -31,6 +31,7 @@ class BBCard extends React.Component {
       <Card
         id="cardID"
         heading={<Heading level={2} text={this.props.title} />}
+        className="bb-card"
         image={
           <Image
             src={this.props.bookJacket ? this.props.bookJacket[0].thumbnails.large.url : null}
