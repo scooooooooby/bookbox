@@ -1,8 +1,5 @@
 # For all pushes, this workflow will
 #     - Install deps
-#     - Lint
-#     - Typecheck
-#     - Test
 name: CI
 
 on: push
@@ -21,5 +18,3 @@ jobs:
           node-version: 13.x
       - name: Cache and install node modules
         uses: bahmutov/npm-install@v1
-      - name: Typecheck
-        run: tsc --noEmit
